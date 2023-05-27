@@ -376,7 +376,7 @@ if enp_x-stp_x<0 & enp_y-stp_y>0
         end
     end
 end
-if enp_x-stp_x<0 & enp_x-stp_x<0
+if enp_x-stp_x<0 & enp_y-stp_y<0
     for s=1:lstep:-enp_x+stp_x-enp_y+stp_y
         if(y_pos>((enp_y-stp_y)/(enp_x-stp_x)*(x_pos-stp_x)+stp_y))
             %line(handles.axes1,[x_pos,x_pos],[y_pos,y_pos+lstep])
@@ -455,7 +455,7 @@ for c=1:length(lxpos)-1
     plot(handles.axes1,lxpos(c),lypos(c),'o','Color',[1,1,0],'MarkerEdgeColor','k');
     pause(0.8)
 end
-plot(handles.axes1,lxpos(length(lxpos)),lypos(length(lxpos)),'o','Color',[1,1,0],'MarkerEdgeColor','k');
+%plot(handles.axes1,lxpos(length(lxpos)),lypos(length(lxpos)),'o','Color',[1,1,0],'MarkerEdgeColor','k');
 
 % --- Executes on button press in pushbutton7.
 function pushbutton7_Callback(hObject, eventdata, handles)
