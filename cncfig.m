@@ -407,9 +407,10 @@ cenp_x=str2num(get(handles.cen_x,'string'));
 cenp_y=str2num(get(handles.cen_y,'string'));
 cip_x=str2num(get(handles.ci_x,'string'));
 cip_y=str2num(get(handles.ci_y,'string'));
+cstep=str2num(get(handles.c_step,'string'));
 t1 = atan2(cstp_y-cip_y,cstp_x-cip_x);% 起点的极坐标角度 
-if t1 == pi & cstp_y == 0
-    t1 = -pi;
+if t1 == pi & cstp_y == cip_y
+    t1 = -pi
 end
 t2 = atan2(cenp_y-cip_y,cenp_x-cip_x);% 终点的极坐标角度 
 r = sqrt((cip_y-cstp_y)^2+(cip_x-cstp_x)^2);% 半径 
@@ -419,45 +420,45 @@ y = r*sin(t)+cip_y; % 直角坐标y值
 plot(handles.axes2,x,y) % 画圆弧
 axis (handles.axes2,'equal')
 grid (handles.axes2, 'on')
-n=2^3
-jvx=abs(cstp_y)
-jvy=abs(cstp_x)
-jrx=0
-jry=0
-ex=cip_x-cstp_x
-ey=cstp_y-(cip_y-r)
-x=cstp_x
-y=cstp_y
-cxpos=[]
-cypos=[]
-cxpos(1)=x
-cypos(1)=y
-count=0
+n=2^3;
+jvx=abs(cstp_y-cip_y);
+jvy=abs(cstp_x-cip_x);
+jrx=0;
+jry=0;
+ex=cip_x-cstp_x;
+ey=cstp_y-(cip_y-r);
+x=cstp_x;
+y=cstp_y;
+cxpos=[];
+cypos=[];
+cxpos(1)=x;
+cypos(1)=y;
+count=0;
 while 1
     count=count +1
-    if count >100
+    if count >100;
         break
     end
     flag=0;
-    jrx=jrx+jvx
-    jry=jry+jvy
+    jrx=jrx+jvx;
+    jry=jry+jvy;
     if jrx>=n & ex >0
         jrx=jrx-n;
-        x=x+1;
-        jvy=jvy-1
+        x=x+cstep;
+        jvy=jvy-cstep;
         flag=1;
-        ex=ex-1
+        ex=ex-cstep;
     end
     if jry>=n & ey >0
         jry=jry-n;
-        y=y-1;
-        jvx=jvx+1
+        y=y-cstep;
+        jvx=jvx+cstep;
         flag=1;
-        ey=ey-1
+        ey=ey-cstep;
     end
     if flag==1
-        cxpos(length(cxpos)+1)=x
-        cypos(length(cypos)+1)=y
+        cxpos(length(cxpos)+1)=x;
+        cypos(length(cypos)+1)=y;
     end
     if ex==0 & ey==0
         break
@@ -466,6 +467,52 @@ end
 setappdata(0,'cposx',cxpos);
 setappdata(0,'cposy',cypos);
 setappdata(0,'cnowstep',1);
+
+jvx=r;
+jvy=0;
+jrx=0;
+jry=0;
+ex=cenp_x-cip_x;
+ey=cenp_y-(cip_y-r);
+x=cip_x;
+y=cip_y-r;
+cxpos2=[];
+cypos2=[];
+cxpos2(1)=x;
+cypos2(1)=y;
+count=0;
+while 1
+    count=count +1
+    if count >100;
+        break
+    end
+    flag=0;
+    jrx=jrx+jvx;
+    jry=jry+jvy;
+    if jrx>=n & ex >0
+        jrx=jrx-n;
+        x=x+cstep;
+        jvy=jvy+cstep;
+        flag=1;
+        ex=ex-cstep;
+    end
+    if jry>=n & ey >0
+        jry=jry-n;
+        y=y+cstep;
+        jvx=jvx-cstep;
+        flag=1;
+        ey=ey-cstep;
+    end
+    if flag==1
+        cxpos2(length(cxpos2)+1)=x;
+        cypos2(length(cypos2)+1)=y;
+    end
+    if ex==0 & ey==0
+        break
+    end
+end
+setappdata(0,'cposx2',cxpos2);
+setappdata(0,'cposy2',cypos2);
 
 % --- Executes on button press in pushbutton4.
 function pushbutton4_Callback(hObject, eventdata, handles)
@@ -490,13 +537,18 @@ function pushbutton5_Callback(hObject, eventdata, handles)
 cxpos=getappdata(0,'cposx');
 cypos=getappdata(0,'cposy');
 step=getappdata(0,'cnowstep');
+cxpos2=getappdata(0,'cposx2');
+cypos2=getappdata(0,'cposy2');
 if step < length(cxpos)
     hold(handles.axes2,'on');
     plot(handles.axes2,cxpos(step),cypos(step),'.','Color',[1,0,0]);
     line(handles.axes2,[cxpos(step),cxpos(step+1)],[cypos(step),cypos(step+1)],'Color',[0,1,1]);
     setappdata(0,'cnowstep',step+1)
+elseif step< length(cxpos)+length(cxpos2)-1
+    plot(handles.axes2,cxpos2(step-length(cxpos)+1),cypos2(step-length(cxpos)+1),'.','Color',[1,0,0]);
+    line(handles.axes2,[cxpos2(step-length(cxpos)+1),cxpos2(step-length(cxpos)+1+1)],[cypos2(step-length(cxpos)+1),cypos2(step-length(cxpos)+1+1)],'Color',[0,1,1]);
+    setappdata(0,'cnowstep',step+1)
 end
-
 % --- Executes on button press in pushbutton6.
 function pushbutton6_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton6 (see GCBO)
@@ -523,6 +575,14 @@ hold(handles.axes2,'on');
 for c=1:length(cxpos)-1
     line(handles.axes2,[cxpos(c),cxpos(c+1)],[cypos(c),cypos(c+1)],'Color',[0,1,0]);
     plot(handles.axes2,cxpos(c),cypos(c),'o','Color',[1,1,0],'MarkerEdgeColor','k');
+    pause(0.8)
+end
+cxpos2=getappdata(0,'cposx2');
+cypos2=getappdata(0,'cposy2');
+hold(handles.axes2,'on');
+for c=1:length(cxpos2)-1
+    line(handles.axes2,[cxpos2(c),cxpos2(c+1)],[cypos2(c),cypos2(c+1)],'Color',[0,1,0]);
+    plot(handles.axes2,cxpos2(c),cypos2(c),'o','Color',[1,1,0],'MarkerEdgeColor','k');
     pause(0.8)
 end
 
