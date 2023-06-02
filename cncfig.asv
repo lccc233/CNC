@@ -465,7 +465,6 @@ while 1
 end
 setappdata(0,'cposx',cxpos);
 setappdata(0,'cposy',cypos);
-setappdata(0,'cnowstep',1);
 
 % --- Executes on button press in pushbutton4.
 function pushbutton4_Callback(hObject, eventdata, handles)
@@ -490,10 +489,10 @@ function pushbutton5_Callback(hObject, eventdata, handles)
 cxpos=getappdata(0,'cposx');
 cypos=getappdata(0,'cposy');
 step=getappdata(0,'cnowstep');
-if step < length(cxpos)
-    hold(handles.axes2,'on');
-    plot(handles.axes2,cxpos(step),cypos(step),'.','Color',[1,0,0]);
-    line(handles.axes2,[cxpos(step),cxpos(step+1)],[cypos(step),cypos(step+1)],'Color',[0,1,1]);
+if step < length(lxpos)
+    hold(handles.axes1,'on');
+    plot(handles.axes1,lxpos(step),lypos(step),'.','Color',[1,0,0]);
+    line(handles.axes1,[lxpos(step),lxpos(step+1)],[lypos(step),lypos(step+1)],'Color',[0,1,1]);
     setappdata(0,'cnowstep',step+1)
 end
 
