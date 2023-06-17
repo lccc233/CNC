@@ -62,7 +62,12 @@ function st_y_Callback(hObject, eventdata, handles)
 
 % --- Executes during object creation, after setting all properties.
 function st_y_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to st_y (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
 
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
@@ -93,9 +98,22 @@ end
 
 
 function en_y_Callback(hObject, eventdata, handles)
+% hObject    handle to en_y (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
 
+% Hints: get(hObject,'String') returns contents of en_y as text
+%        str2double(get(hObject,'String')) returns contents of en_y as a double
+
+
+% --- Executes during object creation, after setting all properties.
 function en_y_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to en_y (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
 
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
@@ -113,7 +131,12 @@ function cst_x_Callback(hObject, eventdata, handles)
 
 % --- Executes during object creation, after setting all properties.
 function cst_x_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to cst_x (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
 
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
