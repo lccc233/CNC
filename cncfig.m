@@ -235,7 +235,7 @@ end
 
 
 % --- Executes on button press in l_draw.
-function l_draw_Callback(hObject, eventdata, handles)
+function l_draw_Callback(hObject, eventdata, handles)%直线插补部分
 % hObject    handle to l_draw (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
@@ -319,7 +319,7 @@ setappdata(0,'nowstep',1);
 
 
 % --- Executes on button press in c_draw.
-function c_draw_Callback(hObject, eventdata, handles)
+function c_draw_Callback(hObject, eventdata, handles)%圆弧插补部分
 % hObject    handle to c_draw (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
@@ -455,7 +455,7 @@ setappdata(0,'cposx2',cxpos2);
 setappdata(0,'cposy2',cypos2);
 
 % --- Executes on button press in pushbutton4.
-function pushbutton4_Callback(hObject, eventdata, handles)
+function pushbutton4_Callback(hObject, eventdata, handles)%单步显示直线插补
 % hObject    handle to pushbutton4 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
@@ -470,7 +470,7 @@ if step < length(lxpos)
 end
 
 % --- Executes on button press in pushbutton5.
-function pushbutton5_Callback(hObject, eventdata, handles)
+function pushbutton5_Callback(hObject, eventdata, handles)%单步显示圆弧插补
 % hObject    handle to pushbutton5 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
@@ -490,7 +490,7 @@ elseif step< length(cxpos)+length(cxpos2)-1
     setappdata(0,'cnowstep',step+1)
 end
 % --- Executes on button press in pushbutton6.
-function pushbutton6_Callback(hObject, eventdata, handles)
+function pushbutton6_Callback(hObject, eventdata, handles)%显示直线连续插补过程
 % hObject    handle to pushbutton6 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
@@ -505,7 +505,7 @@ end
 %plot(handles.axes1,lxpos(length(lxpos)),lypos(length(lxpos)),'o','Color',[1,1,0],'MarkerEdgeColor','k');
 
 % --- Executes on button press in pushbutton7.
-function pushbutton7_Callback(hObject, eventdata, handles)
+function pushbutton7_Callback(hObject, eventdata, handles)%连续显示圆弧插补过程
 % hObject    handle to pushbutton7 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
